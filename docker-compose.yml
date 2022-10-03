@@ -53,11 +53,14 @@ services:
     environment:
       <<: *common-variables
       NODE_PATH: src
-      CHOKIDAR_USEPOLLING: 'true'
+      #CHOKIDAR_USEPOLLING: 'true' # Para react-script menor a v5.0.0
+      WATCHPACK_POLLING: 'true' # Para react-script v^5.0.0
     ports:
       - 3000:3000
     volumes:
       - ./client/src:/app/src
+      - ./client/public:/app/public
+      - ./client/package.json:/app/package.json
     links:
       - server
     command: npm start
