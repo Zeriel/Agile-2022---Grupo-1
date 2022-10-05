@@ -14,10 +14,10 @@ function Navbar() {
       <NavContainer>
         <h2>Incub<span>App</span></h2>
         <div className={`link ${clicked ? 'active' : ''}`}>
-          <a onClick={handleClick} href="/">Home</a>
-          <a onClick={handleClick} href="/">Mis ideas</a>
-          <a onClick={handleClick} href="/">Mis inversiones</a>
-          <a onClick={handleClick} href="/">Cargar idea</a>
+          <a className='hover-link' onClick={handleClick} href="/">Home</a>
+          <a className='hover-link' onClick={handleClick} href="/">Mis ideas</a>
+          <a className='hover-link' onClick={handleClick} href="/">Mis inversiones</a>
+          <a className='hover-link' onClick={handleClick} href="/">Cargar idea</a>
         </div>
         <div className='hamburger'>
           <HamburgerButton clicked={clicked} handleClick={handleClick}/>
@@ -31,24 +31,27 @@ function Navbar() {
 export default Navbar
 
 const NavContainer = styled.nav`
-    h2{
-        color: white;
-        font-weight: 400;
-        span{
-          font-weight: bold;
-        }
-    }
-
     padding: .4rem;
     background-color: #48a345;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    
+    h2{
+        font-size: 1.8em;
+        color: white;
+        font-weight: 400;
+        margin-left: 2%;
+        span{
+          font-weight: bold;
+          color: #bfffbb
+        }
+    }
 
     a{
-      color: white;
       text-decoration: none;
       margin-right: 1rem;
+      transition: all .3s;
     }
 
     .link{
@@ -69,9 +72,10 @@ const NavContainer = styled.nav`
     	  position: initial;
         margin: 0;
         a{
-          font-size: 1rem;
+          font-size: 1.3rem;
           color: white;
-          display: inline;
+          //display: inline;  inline-block es para el estilo de hover
+          display: inline-block;
         }
       }
     }
@@ -89,8 +93,29 @@ const NavContainer = styled.nav`
       a{
         font-size: 2rem;
         margin-top: 1rem;
-        color: white;
       }
+    }
+
+    // Estilo de hover para links, fuente:
+    // https://codepen.io/T3chnician/pen/NORBRG
+    .hover-link::after {
+      content: '';
+      display: block;
+      width: 0;
+      height: 2px;
+      background: #bfffbb;
+      transition: width .3s;
+    }
+
+    .hover-link:hover::after {
+      width: 100%;
+      transition: width .3s;
+    }
+
+    // Lo invente yo (Fede) para cambiar el color del texto con hover
+    .hover-link:hover {
+      color: #bfffbb;
+      transition: all .3s;
     }
 
     .hamburger{
