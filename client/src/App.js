@@ -7,7 +7,7 @@ function App() {
   return (
     <>
       <Navbar/>
-      <IdeaSummary/>
+      <IdeaSummary saved={false}/>
     </>
   );
 }

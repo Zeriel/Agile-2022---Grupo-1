@@ -1,14 +1,22 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import smart from '../images/smart.png'
+import emptyLike from '../images/empty-like.png'
+import filledLike from '../images/filled-like.png'
 
-function IdeaSummary() {
+
+function IdeaSummary(props) {
+
+    const [liked, setLike] = useState(props.saved)
+    const handleLike = () => {
+        setLike(!liked);
+    }
   return (
     <>
       <Idea>
         <div className="head">
             <p className="title">Mesita de Luz Smart</p>
-            <img className="like" src="https://img.icons8.com/emoji/48/000000/green-heart.png"/>
+            <img className="like" src={liked ? filledLike : emptyLike} onClick={handleLike} alt="like button"/>
         </div>
         <div className="content">
             <img src={smart} alt="Smart"/>
@@ -46,6 +54,12 @@ const Idea = styled.div`
         }
         .like{
             align-self: center;
+            width: 35px;
+            cursor: pointer;
+        }
+        @media (max-width: 768px) {
+            margin-left: -17px;
+            margin-right: -17px;
         }
     }
     .content{
@@ -87,6 +101,6 @@ const Idea = styled.div`
         height: auto;
         padding-bottom: 20px;
         position: relative;
-        z-index: -10;
+        z-index: -5;
     }
 `
