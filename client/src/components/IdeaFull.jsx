@@ -5,6 +5,7 @@ import smart from '../images/smart.png'
 import emptyLike from '../images/empty-like.png'
 import filledLike from '../images/filled-like.png'
 import { useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom'
 
 function IdeaFull(props) {
 
@@ -33,82 +34,105 @@ function IdeaFull(props) {
   if (!idea) return null;
 
   return (
-    <Idea>
+    <>
+      <IdeaContainer>
+        <div className="header-container">
+            <img className="picture" src={smart} alt="Smart"/>
             <div className="head">
-                <div>
+                <div className="title-container">
                     <p className="title">{idea.nombre}</p>
-                    <span className="creator">por <strong>{idea.nombre_emp} {idea.apellido_emp}</strong></span>
-                    <br></br>
-                    <span className="creator">Presupuesto: <strong>{idea.presupuesto}</strong></span>
+                    <p className="creator">por <strong>{idea.nombre_emp} {idea.apellido_emp}</strong></p>
+                    <p className="info">Categoría: <strong>Electrónica</strong></p>
+                    <p className="info">Presupuesto inicial: <strong>${idea.presupuesto}</strong></p>
+                    <Link className="contrib-btn">Quiero Contribuir</Link>
                 </div>
                 <img className="like" src={liked ? filledLike : emptyLike} onClick={handleLike} alt="like button"/>
             </div>
-            <div className="content" onClick={props.clicked}>
-                <img src={smart} alt="Smart"/>
-                <p>{idea.descripcion}</p>
-            </div>
-        </Idea>
+        </div>
+        
+        <p className="subtitle"><strong>Una breve introducción</strong></p>
+        <p ID="summary">{idea.descripcion}</p>
+
+        <p className="historia-title"><strong>Así Comienza Nuestra Historia</strong></p>
+        <p className="historia-text">{idea.cronologia}</p>
+      </IdeaContainer>
+    </>
   )
 }
 
 export default IdeaFull
 
 
-const Idea = styled.div`
+const IdeaContainer = styled.div`
+    width: 80%;
     background-color: white;
-    height: 450px;
-    border-radius: 10px;
-    box-shadow: 0px 5px 15px 1px #aaa;
-    margin: 20px 10px;
+    height: 100%;
+    margin: 20px auto;
     padding: 1px 30px;
     position: relative;
-    .head{
+    .header-container{
         display: flex;
-        justify-content: space-between;
-        .title{
-            font-size: 3rem;
-            margin: 3px 0;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
+        align-items: flex-start;
+        margin-bottom: 25px;
+        .picture{
+            width: 350px;
+            /* mantiene la imagen centrada para que no se deforme */
+            margin: auto 30px auto 0;
+            align-self: flex-start;
+            padding-right: 25px;
+            border-right: #48a345 solid 4px;
+        }
+        .head{
+            display: flex;
+            justify-content: space-between;
+            height: 350px;
+            .title-container{
+                position: relative;
+                .title{
+                    margin: 0;
+                    font-size: 3rem;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    @media (max-width: 768px) {
+                        font-size: 1.5rem;
+                        font-weight: 600;
+                    }
+                }
+                .creator{
+                    color: #738a79;
+                    font-size: 1.1rem;
+                    padding-bottom: 15px;
+                }
+                .info{
+                    color: #494949;
+                    font-size: 1.1rem;
+                    margin: 10px 0;
+                }
+            }
+            .like{
+                margin-left: 30px;
+                width: 35px;
+                align-self: flex-start;
+                cursor: pointer;
+            }
             @media (max-width: 768px) {
-                font-size: 1.5rem;
-                font-weight: 600;
+                margin-left: -17px;
+                margin-right: -17px;
             }
         }
-        .creator{
-            color: #738a79;
-            padding-left: 4px;
-        }
-        .like{
-            align-self: center;
-            width: 35px;
-            cursor: pointer;
-        }
-        @media (max-width: 768px) {
-            margin-left: -17px;
-            margin-right: -17px;
-        }
-    }
-    .content{
-        display: flex;
-        margin-top: 25px;
-        img{
-            width: 300px;
-            /* mantiene la imagen centrada para que no se deforme */
-            margin: auto;
-            text-align: center;
-        }
-        p{
-            margin: 0 30px;
+        .contrib-btn{
             font-size: 1.2rem;
-            line-height: 1.5;
-            height: calc(300px * 0.6);
-            display: -webkit-box;
-            -webkit-box-orient: vertical;
-            -webkit-line-clamp: 6;
-            overflow: hidden;
-            text-overflow: ellipsis;
+            text-decoration: none;
+            color: white;
+            position: absolute;
+            bottom: 0;
+            padding: 10px 25px;
+            background-color: #738a79;
+            border-radius: 6px;
+        }
+        .contrib-btn:hover{
+            background-color: #48a345;
         }
         @media (max-width: 768px) {
             flex-direction: column;
@@ -123,19 +147,26 @@ const Idea = styled.div`
             }
         }
     }
-    .ver-mas{
+    
+    .subtitle{
+        color: #494949;
         font-size: 1.2rem;
-        position: absolute;
-        bottom: 20px;
-        right: 25px;
-        text-decoration: none;
-        color: #306d2e;
-        @media (max-width: 768px) {
-            display: none;
-        }
+        margin: 3% 0 2% 0;
     }
-    .ver-mas:hover{
-        color: black;
+    #summary{
+        font-size: 1.2rem;
+        line-height: 1.5;
+    }
+    .historia-title{
+        color: #494949;
+        font-size: 1.4rem;
+        margin: 3% 0 2% 0;
+        text-align: center;
+        text-decoration: underline;
+    }
+    .historia-text{
+        font-size: 1.1rem;
+        line-height: 1.5;
     }
     @media (max-width: 768px) {
         display: flex;
