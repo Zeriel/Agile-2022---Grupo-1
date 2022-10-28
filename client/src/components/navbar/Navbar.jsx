@@ -17,7 +17,7 @@ function Navbar() {
           <a className='hover-link' onClick={handleClick} href="/">Home</a>
           <a className='hover-link' onClick={handleClick} href="/">Mis ideas</a>
           <a className='hover-link' onClick={handleClick} href="/">Mis inversiones</a>
-          <a className='hover-link' onClick={handleClick} href="/">Cargar idea</a>
+          <a className='hover-link' onClick={handleClick} href="/loadidea">Cargar idea</a>
         </div>
         <div className='hamburger'>
           <HamburgerButton clicked={clicked} handleClick={handleClick}/>

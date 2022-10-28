@@ -55,7 +55,7 @@ const IdeaForm = styled.div`
         width: 50%;
         border-radius: 10px;
         box-shadow: 0px 5px 15px 1px #aaa;
-        margin: 0px auto;
+        margin: 20px auto;
         padding: 1px 0px 20px;
 
     .formulario{
