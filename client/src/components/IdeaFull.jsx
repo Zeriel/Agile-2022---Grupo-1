@@ -14,7 +14,7 @@ function IdeaFull(props) {
     }
   return (
     <>
-      <div>
+      <IdeaContainer>
         <div className="header-container">
             <img className="picture" src={smart} alt="Smart"/>
             <div className="head">
@@ -54,9 +54,125 @@ function IdeaFull(props) {
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae iure enim rem mollitia eveniet ea. Dolor quibusdam consequatur commodi, aliquam molestias pariatur, 
           officiis libero ratione ea, a ipsum quis aperiam.
         </p>
-      </div>
+      </IdeaContainer>
     </>
   )
 }
 
 export default IdeaFull
+
+const IdeaContainer = styled.div`
+    width: 80%;
+    background-color: white;
+    height: 100%;
+    margin: 20px auto;
+    padding: 1px 30px;
+    position: relative;
+
+    .header-container{
+        display: flex;
+        align-items: flex-start;
+        margin-bottom: 25px;
+        .picture{
+            width: 350px;
+            /* mantiene la imagen centrada para que no se deforme */
+            margin: auto 30px auto 0;
+            align-self: flex-start;
+            padding-right: 25px;
+            border-right: #48a345 solid 4px;
+        }
+        .head{
+            display: flex;
+            justify-content: space-between;
+            height: 350px;
+            .title-container{
+                position: relative;
+                .title{
+                    margin: 0;
+                    font-size: 3rem;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    @media (max-width: 768px) {
+                        font-size: 1.5rem;
+                        font-weight: 600;
+                    }
+                }
+                .creator{
+                    color: #738a79;
+                    font-size: 1.1rem;
+                    padding-bottom: 15px;
+                }
+                .info{
+                    color: #494949;
+                    font-size: 1.1rem;
+                    margin: 10px 0;
+                }
+            }
+            .like{
+                margin-left: 30px;
+                width: 35px;
+                align-self: flex-start;
+                cursor: pointer;
+            }
+            @media (max-width: 768px) {
+                margin-left: -17px;
+                margin-right: -17px;
+            }
+        }
+        .contrib-btn{
+            font-size: 1.2rem;
+            text-decoration: none;
+            color: white;
+            position: absolute;
+            bottom: 0;
+            padding: 10px 25px;
+            background-color: #738a79;
+            border-radius: 6px;
+        }
+        .contrib-btn:hover{
+            background-color: #48a345;
+        }
+        @media (max-width: 768px) {
+            flex-direction: column;
+            p{
+                margin-top: 10px;
+                font-size: .9rem;
+                height: calc(200px * 0.55);
+                -webkit-line-clamp: 5;
+            }
+            img{
+                width: 200px;
+            }
+        }
+    }
+    
+    .subtitle{
+        color: #494949;
+        font-size: 1.2rem;
+        margin: 3% 0 2% 0;
+    }
+    #summary{
+        font-size: 1.2rem;
+        line-height: 1.5;
+    }
+    .historia-title{
+        color: #494949;
+        font-size: 1.4rem;
+        margin: 3% 0 2% 0;
+        text-align: center;
+        text-decoration: underline;
+    }
+    .historia-text{
+        font-size: 1.1rem;
+        line-height: 1.5;
+    }
+    @media (max-width: 768px) {
+        display: flex;
+        flex-direction: column;
+        height: auto;
+        padding-bottom: 20px;
+        position: relative;
+        z-index: -5;
+    }
+`
