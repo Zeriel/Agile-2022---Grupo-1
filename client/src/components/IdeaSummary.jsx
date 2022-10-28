@@ -16,7 +16,10 @@ function IdeaSummary(props) {
     <>
       <Idea>
         <div className="head">
-            <p className="title">Mesita de Luz Smart</p>
+            <div>
+                <p className="title">Mesita de Luz Smart</p>
+                <span className="creator">por <strong>UTN Fundation</strong></span>
+            </div>
             <img className="like" src={liked ? filledLike : emptyLike} onClick={handleLike} alt="like button"/>
         </div>
         <div className="content" onClick={props.clicked}>
@@ -47,13 +50,18 @@ const Idea = styled.div`
         justify-content: space-between;
         .title{
             font-size: 3rem;
-            margin: 5px 0;
+            margin: 3px 0;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
             @media (max-width: 768px) {
                 font-size: 1.5rem;
+                font-weight: 600;
             }
+        }
+        .creator{
+            color: #738a79;
+            padding-left: 4px;
         }
         .like{
             align-self: center;
@@ -105,6 +113,9 @@ const Idea = styled.div`
         right: 25px;
         text-decoration: none;
         color: #306d2e;
+        @media (max-width: 768px) {
+            display: none;
+        }
     }
     .ver-mas:hover{
         color: black;
