@@ -2,7 +2,7 @@ import React from 'react'
 
 function IdeaFull() {
   return (
-    <div>IdeaFull</div>
+    <div>IdeaFull prueba 1</div>
   )
 }
 
