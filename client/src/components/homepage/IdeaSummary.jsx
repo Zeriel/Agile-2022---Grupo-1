@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
+import axios from 'axios'
 import styled from 'styled-components'
-import smart from '../images/smart.png'
-import emptyLike from '../images/empty-like.png'
-import filledLike from '../images/filled-like.png'
+import smart from '../../images/smart.png'
+import emptyLike from '../../images/empty-like.png'
+import filledLike from '../../images/filled-like.png'
 import { Link } from 'react-router-dom'
 
 
@@ -12,25 +13,41 @@ function IdeaSummary(props) {
     const handleLike = () => {
         setLike(!liked);
     }
+
+    const [ideas, setIdea] = React.useState(null);
+
+    React.useEffect(() => {
+        axios.get(`http://localhost:${process.env.REACT_APP_SERVER_PORT}/getIdeas`, {
+        }).then((response) => {
+          setIdea(response.data);
+          console.log(response.data)
+        });
+    }, []);
+
+  if (!ideas) return null;
+
   return (
     <>
-      <Idea>
-        <div className="head">
-            <div>
-                <p className="title">Mesita de Luz Smart</p>
-                <span className="creator">por <strong>UTN Fundation</strong></span>
+      {ideas.map((idea, index) => (
+        <div key={index}>
+        <Idea>
+            <div className="head">
+                <div>
+                    <p className="title">{idea.nombre}</p>
+                    <span className="creator">por <strong>{idea.nombre_emp} {idea.apellido_emp}</strong></span>
+                    <br></br>
+                    <span className="creator">Presupuesto: <strong>{idea.presupuesto}</strong></span>
+                </div>
+                <img className="like" src={liked ? filledLike : emptyLike} onClick={handleLike} alt="like button"/>
             </div>
-            <img className="like" src={liked ? filledLike : emptyLike} onClick={handleLike} alt="like button"/>
+            <div className="content" onClick={props.clicked}>
+                <img src={smart} alt="Smart"/>
+                <p>{idea.descripcion}</p>
+            </div>
+            <Link className="ver-mas" to={'/detail/' + idea.id} state={{ id: idea.id }}>Más informción...</Link>
+        </Idea>
         </div>
-        <div className="content" onClick={props.clicked}>
-            <img src={smart} alt="Smart"/>
-            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
-                when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic 
-                typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently 
-                with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-        </div>
-        <Link className="ver-mas" onClick={props.clicked}>Más informción...</Link>
-      </Idea>
+      ))}
     </>
   )
 }

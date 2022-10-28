@@ -3,7 +3,7 @@ version: "3.4"
 x-common-variables: &common-variables
   MYSQL_USER: sampleuser
   MYSQL_PASSWORD: samplepassword
-  MYSQL_DATABASE: sampledb
+  MYSQL_DATABASE: incubapdb
   REACT_APP_SERVER_PORT: 8000
 
 services:
@@ -18,7 +18,7 @@ services:
       - 3306:3306
     restart: unless-stopped
     volumes:
-      - ./db/sample.sql:/docker-entrypoint-initdb.d/sample.sql
+      - ./db/incubapdb.sql:/docker-entrypoint-initdb.d/sample.sql
   phpmyadmin:
     depends_on:
       - mysql-db

@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import IdeaSummary from './IdeaSummary';
+import IdeaSummary from './homepage/IdeaSummary';
 
 function FormIdea() {
     return (
