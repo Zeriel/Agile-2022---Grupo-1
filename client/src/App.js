@@ -11,7 +11,7 @@ function App() {
       <Navbar/>
       <Routes>
         <Route path="/" element={<Homepage saved={false}/>}/>
-        <Route path='/detail/:id' component={IdeaFull} element={<IdeaFull />}/>
+        <Route exact path="/detail/:id" component={IdeaFull} element={<IdeaFull />}/>
         <Route path="/loadidea" element={<FormIdea />}/>
       </Routes>
     </>
