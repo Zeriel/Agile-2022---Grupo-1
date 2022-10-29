@@ -1,5 +1,7 @@
-FROM node:10-alpine
-#FROM node:18.7-alpine
+#FROM node:10-alpine
+FROM node:18.10-alpine
+
+ENV NODE_OPTIONS=--openssl-legacy-provider
 
 RUN mkdir -p /app
 WORKDIR /app

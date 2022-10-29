@@ -11,10 +11,10 @@ function callServer() {
   });
 }
 
-export function SampleComponent() {
+export function NavbarComponent() {
   return (
     <div>
-      This is a sample component
+      ESto es navbar
       {callServer()}
     </div>
   );

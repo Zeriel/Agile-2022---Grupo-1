@@ -71,7 +71,7 @@ Lo cual detendrá y destruirá los contenedores.
 
 ### Verificar logs
 Los logs que van arrojando los distintos servicios dockerizados pueden consultarse ejecutando:
- - *docker-compose down*
+ - *docker-compose logs -f*
 
 
 # Documentación fuente para el armado del entorno dockerizado
