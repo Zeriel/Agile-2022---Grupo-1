@@ -63,6 +63,7 @@ function IdeaFull(props) {
                             <p className="creator">por <strong>{idea.nombre_emp} {idea.apellido_emp}</strong></p>
                             <p className="info">Categoría: <strong>Electrónica</strong></p>
                             <p className="info">Presupuesto inicial: <strong>${idea.presupuesto}</strong></p>
+                            <p className="info">Prueba/demo: <strong>Link a la demo</strong></p>
                             <Link className="contrib-btn">Quiero Contribuir</Link>
                         </div>
                         <img className="like" src={liked ? filledLike : emptyLike} onClick={handleLike} alt="like button"/>
