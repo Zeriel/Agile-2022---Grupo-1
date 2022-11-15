@@ -24,7 +24,11 @@ function IdeaSummary(props) {
         });
     }, []);
 
-  if (!ideas) return null;
+  if (!ideas) return (
+    <>
+      No hay ideas cargadas
+    </>
+  );
 
   return (
     <>
