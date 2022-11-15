@@ -55,7 +55,6 @@ INSERT INTO `ideas` (`id`, `nombre`, `descripcion`, `presupuesto`, `cronologia`,
 
 CREATE TABLE `usuarios` (
   `id` int(11) NOT NULL,
-  `user` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   `password` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   `nombre` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
   `apellido` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
@@ -66,10 +65,10 @@ CREATE TABLE `usuarios` (
 -- Volcado de datos para la tabla `usuarios`
 --
 
-INSERT INTO `usuarios` (`id`, `user`, `password`, `nombre`, `apellido`, `mail`) VALUES
-(1, 'fmoradillo', 'pass', 'Federico', 'Moradillo', 'mora@incubap.com'),
-(2, 'david', 'pass', 'David', 'Valverde', 'mora@incubap.com'),
-(3, 'grace', 'pass', 'Rubio', 'Sabbath', 'mora@incubap.com');
+INSERT INTO `usuarios` (`id`, `password`, `nombre`, `apellido`, `mail`) VALUES
+(1, 'pass', 'Federico', 'Moradillo', 'mora@incubap.com'),
+(2, 'pass', 'David', 'Valverde', 'david@incubap.com'),
+(3, 'pass', 'Rubio', 'Sabbath', 'rubio@incubap.com');
 
 --
 -- Índices para tablas volcadas
