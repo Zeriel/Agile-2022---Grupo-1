@@ -57,14 +57,40 @@ app.get('/getIdea', (req, res) => {
 });
 
 app.post('/login', (req, res) => {
-  const username = req.body.username;
+  const email = req.body.email;
   const password = req.body.password;
 
-  pool.query(`select usuarios.nombre, usuarios.mail, usuarios.apellido from usuarios where usuarios.mail = '${username}' && usuarios.password = '${password}'`, (err, results) => {
+  pool.query(`select usuarios.nombre, usuarios.mail, usuarios.apellido from usuarios where usuarios.mail = '${email}' && usuarios.password = '${password}'`, (err, results) => {
     if (err) {
       return res.send(err);
     } else {
       return res.send(results);
+    }
+  });
+});
+
+app.post('/register', (req, res) => {
+  const email = req.body.email;
+  const password = req.body.password;
+  const firstname = req.body.firstname;
+  const lastname = req.body.lastname;
+
+  pool.query(`select usuarios.mail from usuarios where usuarios.mail = '${email}'`, (err, results) => {
+    if (err) {
+      return res.send(err);
+    } else {
+      if (results.length !== 0) {
+        return res.send('repetido');
+      }
+      else {
+        pool.query(`insert into usuarios (password, nombre, apellido, mail) values ('${password}', '${firstname}', '${lastname}', '${email}')`, (err, results) => {
+          if (err) {
+            return res.send(err);
+          } else {
+            return res.send(results);
+          }
+        });
+      }
     }
   });
 });

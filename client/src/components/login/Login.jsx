@@ -8,7 +8,7 @@ import styled from 'styled-components';
 //  - https://www.digitalocean.com/community/tutorials/how-to-add-login-authentication-to-react-applications
 
 const Login = () => {
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [user, setUser] = useState()
 
@@ -18,10 +18,9 @@ const Login = () => {
 
   const handleSubmit = async e => {
     e.preventDefault();
-    const user = { username: username, password: password };
-    // send the username and password to the server
+    // send the email and password to the server
     axios.post(`http://localhost:${process.env.REACT_APP_SERVER_PORT}/login`, {
-        username : username,
+        email : email,
         password : password,
       })
     .then((response) => {
@@ -77,7 +76,7 @@ const Login = () => {
                                     <p className="text-black-50 mb-5">Ingrese con su correo y clave registrados</p>
 
                                     <div className="form-outline form-black mb-4">
-                                        <input placeholder="usuario@example.com" type="email" value={username} id="typeEmailX" className="form-control form-control-lg" onChange={({ target }) => setUsername(target.value)} />
+                                        <input placeholder="usuario@example.com" type="email" value={email} id="typeEmailX" className="form-control form-control-lg" onChange={({ target }) => setEmail(target.value)} />
                                         <label className="form-label" htmlFor="typeEmailX">Correo</label>
                                     </div>
 
@@ -93,7 +92,7 @@ const Login = () => {
                                     </div>
 
                                     {error?
-                                        <div class="p-3 mb-2 bg-danger text-white">{ error }</div>
+                                        <div className="p-3 mb-2 bg-danger text-white">{ error }</div>
                                     :null} 
 
                                 </div>
