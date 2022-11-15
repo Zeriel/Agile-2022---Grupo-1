@@ -12,6 +12,7 @@ const Register = () => {
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [user, setUser] = useState()
 
   const [error,setError]=useState();
@@ -21,38 +22,43 @@ const Register = () => {
 
   const handleSubmit = async e => {
     e.preventDefault();
-    // send the username and password to the server
-    axios.post(`http://localhost:${process.env.REACT_APP_SERVER_PORT}/register`, {
+    if (password != confirmPassword){
+      setError('Las claves no coinciden')
+    }
+    else {
+      // send the username and password to the server
+      axios.post(`http://localhost:${process.env.REACT_APP_SERVER_PORT}/register`, {
         password : password,
         firstname: firstname,
         lastname: lastname,
         email : email,
       })
-    .then((response) => {
-        if (response.data == 'repetido'){
-          console.log('Mail repetido')
-          setError('El correo ' + email + ' ya se encuentra en uso')
-        } else {
-          // set the state of the user
-          setUser(response.data)
-          // store the user in localStorage
-          localStorage.setItem('user', response.data)
-          console.log(response.data)
-          console.log(user)
-          setError(undefined)
-          setSuccess('Registro con éxito. Redirigiendo...')
-          setTimeout(function(){
-            window.location.href = '/';
-        }, 1500);
-        }
-        
+      .then((response) => {
+          if (response.data == 'repetido'){
+            console.log('Mail repetido')
+            setError('El correo ' + email + ' ya se encuentra en uso')
+          } else {
+            // set the state of the user
+            setUser(response.data)
+            // store the user in localStorage
+            localStorage.setItem('user', response.data)
+            console.log(response.data)
+            console.log(user)
+            setError(undefined)
+            setSuccess('Registro con éxito. Redirigiendo...')
+            setTimeout(function(){
+              window.location.href = '/';
+          }, 1500);
+          }
+          
 
-        
-    }, reason => {
-        console.error(reason); // Error!
-        console.log('Hubo un error en el servidor')
-        setError('Hubo un error en el servidor')
-    });
+          
+      }, reason => {
+          console.error(reason); // Error!
+          console.log('Hubo un error en el servidor')
+          setError('Hubo un error en el servidor')
+      });
+    }
   };
 
   // if there's no user, show the register form
@@ -86,8 +92,13 @@ const Register = () => {
                                     </div>
 
                                     <div className="form-outline form-black mb-4">
-                                        <input type="password" value={password} id="typePasswordX" className="form-control form-control-lg" onChange={({ target }) => setPassword(target.value)} />
-                                        <label className="form-label" htmlFor="typePasswordX">Clave</label>
+                                        <input type="password" value={password} id="typePassword1" className="form-control form-control-lg" onChange={({ target }) => setPassword(target.value)} />
+                                        <label className="form-label" htmlFor="typePassword1">Clave</label>
+                                    </div>
+
+                                    <div className="form-outline form-black mb-4">
+                                        <input type="password" value={confirmPassword} id="typePassword2" className="form-control form-control-lg" onChange={({ target }) => setConfirmPassword(target.value)} />
+                                        <label className="form-label" htmlFor="typePassword2">Confirme clave</label>
                                     </div>
 
                                     <div className="form-outline form-black mb-4">
