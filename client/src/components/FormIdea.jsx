@@ -1,8 +1,14 @@
 import React from 'react'
 import styled from 'styled-components'
 import IdeaSummary from './homepage/IdeaSummary';
+import Login from './login/Login'
 
-function FormIdea() {
+function FormIdea({ user }) {
+
+    // Si el usuario no esta autenticado, redirijo a Login
+    if(!user) {
+        return <Login/>
+    }
     return (
         <>
             <IdeaForm>
