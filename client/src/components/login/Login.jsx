@@ -77,7 +77,7 @@ const Login = () => {
                                     <p className="text-black-50 mb-5">Ingrese con su correo y clave registrados</p>
 
                                     <div className="form-outline form-black mb-4">
-                                        <input type="text" value={username} id="typeEmailX" className="form-control form-control-lg" onChange={({ target }) => setUsername(target.value)} />
+                                        <input placeholder="usuario@example.com" type="email" value={username} id="typeEmailX" className="form-control form-control-lg" onChange={({ target }) => setUsername(target.value)} />
                                         <label className="form-label" htmlFor="typeEmailX">Correo</label>
                                     </div>
 
@@ -88,12 +88,12 @@ const Login = () => {
 
                                     <p className="small mb-5 pb-lg-2"><a className="text-black-50" href="#!">¿Olvidó su contraseña?</a></p>
 
-                                    <button className="btn btn-outline-success btn-lg px-5" type="submit">Ingresar</button>
+                                    <div className="form-outline form-black mb-4">
+                                        <button className="btn btn-outline-success btn-lg px-5" type="submit">Ingresar</button>
+                                    </div>
 
                                     {error?
-                                    <div className="form-outline form-black mb-4">
-                                        <span>{error}</span>
-                                    </div>
+                                        <div class="p-3 mb-2 bg-danger text-white">{ error }</div>
                                     :null} 
 
                                 </div>
