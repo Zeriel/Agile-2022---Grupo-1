@@ -139,11 +139,11 @@ const Search = styled.div`
 
 const Idea = styled.div`
     background-color: white;
-    height: 450px;
+    //height: 450px;
     border-radius: 10px;
     box-shadow: 0px 5px 15px 1px #aaa;
-    margin: 20px 10px;
-    padding: 1px 30px;
+    margin: 20px 10px 50px 10px;
+    padding: 10px 30px;
     position: relative;
     .head{
         display: flex;

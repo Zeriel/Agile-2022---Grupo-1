@@ -44,7 +44,8 @@ function Navbar() {
 export default Navbar
 
 const NavContainer = styled.nav`
-    padding: .4rem;
+    position: relative;
+    padding: 20px;
     background-color: #48a345;
     display: flex;
     align-items: center;

@@ -60,7 +60,7 @@ export default IdeaSummary
 
 const Idea = styled.div`
     background-color: white;
-    height: 450px;
+    //height: 450px;
     border-radius: 10px;
     box-shadow: 0px 5px 15px 1px #aaa;
     margin: 20px 10px;
