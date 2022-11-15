@@ -6,8 +6,9 @@ import emptyLike from '../images/empty-like.png'
 import filledLike from '../images/filled-like.png'
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom'
+import Login from './login/Login'
 
-function IdeaFull(props) {
+function IdeaFull({ user }, props) {
 
   
 
@@ -39,6 +40,11 @@ function IdeaFull(props) {
           setIdea(response.data);
         });
     }, []);
+
+    // Si el usuario no esta autenticado, redirijo a Login
+    if(!user) {
+        return <Login/>
+    }
 
   if (!ideas) return null;
 

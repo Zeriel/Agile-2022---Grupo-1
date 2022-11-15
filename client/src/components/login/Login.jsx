@@ -89,7 +89,7 @@ const Login = () => {
                                 </div>
 
                                 <div>
-                                    <p className="mb-0">¿No posee cuenta? <a href="#!" className="text-black-50 fw-bold">Registrarse</a></p>
+                                    <p className="mb-0">¿No posee cuenta? <a href="/registrarse" className="text-black-50 fw-bold">Registrarse</a></p>
                                 </div>
                                 </form>
                             </div>
@@ -97,8 +97,9 @@ const Login = () => {
                     </div>
                 </div>
             </div>
-            </section>
+            </section>      
     </LoginContgainer>
+    
   );
 };
 

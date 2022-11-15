@@ -10,12 +10,13 @@ import filledLike from '../../images/filled-like.png'
 import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons"
+import Login from '../login/Login'
 
-function Homepage(props) {
+function Homepage({ user }, props) {
 
-  const [queryNombre, setQueryNombre] = useState("")
-  const [queryEmprendedor, setQueryEmp] = useState("")
-  const [queryPresupuesto, setQueryPres] = useState("")
+    const [queryNombre, setQueryNombre] = useState("")
+    const [queryEmprendedor, setQueryEmp] = useState("")
+    const [queryPresupuesto, setQueryPres] = useState("")
 
 
   const [liked, setLike] = useState(props.saved)
@@ -32,91 +33,96 @@ function Homepage(props) {
         });
     }, []);
 
-  if (!ideas) return null;
+    // Si el usuario no esta autenticado, redirijo a Login
+    if(!user) {
+        return <Login/>
+    }
 
-  return (
-    <>
-      <Search>
-            <form className="search" onSubmit={handleSubmit}>
-                <span>Buscar por Título</span>
-                <input
-                    className="search__input"
-                    type="text"
-                    id="search"
-                    onChange={event => setQueryNombre(event.target.value)}
-                />
-                <button className="search__button">
-                    <FontAwesomeIcon icon={faMagnifyingGlass} />
-                </button>
-            </form>
+    if (!ideas) return null;
 
-            <form className="search" onSubmit={handleSubmit}>
-                <span>Buscar por Emprendedor</span>
-                <input
-                    className="search__input"
-                    type="text"
-                    id="search"
-                    onChange={event => setQueryEmp(event.target.value)}
-                />
-                <button className="search__button">
-                    <FontAwesomeIcon icon={faMagnifyingGlass} />
-                </button>
-            </form>
+    return (
+        <>
+        <Search>
+                <form className="search" onSubmit={handleSubmit}>
+                    <span>Buscar por Título</span>
+                    <input
+                        className="search__input"
+                        type="text"
+                        id="search"
+                        onChange={event => setQueryNombre(event.target.value)}
+                    />
+                    <button className="search__button">
+                        <FontAwesomeIcon icon={faMagnifyingGlass} />
+                    </button>
+                </form>
 
-            <form className="search" onSubmit={handleSubmit}>
-                <span>Buscar por presupuesto máximo</span>
-                <input
-                    className="search__input"
-                    type="text"
-                    id="search"
-                    onChange={event => setQueryPres(event.target.value)}
-                />
-                <button className="search__button">
-                    <FontAwesomeIcon icon={faMagnifyingGlass} />
-                </button>
-            </form>
-        </Search>
+                <form className="search" onSubmit={handleSubmit}>
+                    <span>Buscar por Emprendedor</span>
+                    <input
+                        className="search__input"
+                        type="text"
+                        id="search"
+                        onChange={event => setQueryEmp(event.target.value)}
+                    />
+                    <button className="search__button">
+                        <FontAwesomeIcon icon={faMagnifyingGlass} />
+                    </button>
+                </form>
+
+                <form className="search" onSubmit={handleSubmit}>
+                    <span>Buscar por presupuesto máximo</span>
+                    <input
+                        className="search__input"
+                        type="text"
+                        id="search"
+                        onChange={event => setQueryPres(event.target.value)}
+                    />
+                    <button className="search__button">
+                        <FontAwesomeIcon icon={faMagnifyingGlass} />
+                    </button>
+                </form>
+            </Search>
 
 
-      {ideas.filter(post => {
-            if ((queryNombre === '') && (queryEmprendedor === '') && (queryPresupuesto === '')) {
-              return post;
-            } 
-            
-            if ( (queryNombre != '' ) && (post.nombre.toLowerCase().includes(queryNombre.toLowerCase())) ) {
-              return post;
-            }
+        {ideas.filter(post => {
+                if ((queryNombre === '') && (queryEmprendedor === '') && (queryPresupuesto === '')) {
+                return post;
+                } 
+                
+                if ( (queryNombre != '' ) && (post.nombre.toLowerCase().includes(queryNombre.toLowerCase())) ) {
+                return post;
+                }
 
-            if ( ( queryEmprendedor != '') && ( (post.nombre_emp.toLowerCase().includes(queryEmprendedor.toLowerCase())) || (post.apellido_emp.toLowerCase().includes(queryEmprendedor.toLowerCase()))) ) {
-              return post;
-            }
-            
-            if ( (queryPresupuesto != '') && (post.presupuesto <= queryPresupuesto ) ) {
-              return post;
-            }
+                if ( ( queryEmprendedor != '') && ( (post.nombre_emp.toLowerCase().includes(queryEmprendedor.toLowerCase())) || (post.apellido_emp.toLowerCase().includes(queryEmprendedor.toLowerCase()))) ) {
+                return post;
+                }
+                
+                if ( (queryPresupuesto != '') && (post.presupuesto <= queryPresupuesto ) ) {
+                return post;
+                }
 
-        }).map((idea, index) => (
-          <div key={index}>
-          <Idea>
-              <div className="head">
-                  <div>
-                      <p className="title">{idea.nombre}</p>
-                      <span className="creator">por <strong>{idea.nombre_emp} {idea.apellido_emp}</strong></span>
-                      <br></br>
-                      <span className="creator">Presupuesto: <strong>{idea.presupuesto}</strong></span>
-                  </div>
-                  <img className="like" src={liked ? filledLike : emptyLike} onClick={handleLike} alt="like button"/>
-              </div>
-              <div className="content" onClick={props.clicked}>
-                  <img src={smart} alt="Smart"/>
-                  <p>{idea.descripcion}</p>
-              </div>
-              <Link className="ver-mas" to={'/detail/' + idea.id} state={{ id: idea.id }}>Más informción...</Link>
-          </Idea>
-          </div>
-        ))}
-    </>
-  );
+            }).map((idea, index) => (
+            <div key={index}>
+            <Idea>
+                <div className="head">
+                    <div>
+                        <p className="title">{idea.nombre}</p>
+                        <span className="creator">por <strong>{idea.nombre_emp} {idea.apellido_emp}</strong></span>
+                        <br></br>
+                        <span className="creator">Presupuesto: <strong>{idea.presupuesto}</strong></span>
+                    </div>
+                    <img className="like" src={liked ? filledLike : emptyLike} onClick={handleLike} alt="like button"/>
+                </div>
+                <div className="content" onClick={props.clicked}>
+                    <img src={smart} alt="Smart"/>
+                    <p>{idea.descripcion}</p>
+                </div>
+                <Link className="ver-mas" to={'/detail/' + idea.id} state={{ id: idea.id }}>Más informción...</Link>
+            </Idea>
+            </div>
+            ))}
+        </>
+    );
 }
 
 export default Homepage
