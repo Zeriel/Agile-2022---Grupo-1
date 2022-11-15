@@ -5,7 +5,7 @@ import Register from './components/login/FormRegister'
 import Navbar from './components/navbar/Navbar';
 import Homepage from './components/homepage/Homepage';
 import FormIdea from './components/FormIdea';
-import { BrowserRouter, Route, Routes, Switch  } from 'react-router-dom'
+import { Route, Routes  } from 'react-router-dom'
 import IdeaFull from './components/IdeaFull';
 
 function App() {

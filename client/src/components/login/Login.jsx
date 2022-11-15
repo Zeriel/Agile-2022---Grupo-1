@@ -18,21 +18,31 @@ const Login = () => {
 
   const handleSubmit = async e => {
     e.preventDefault();
-    const user = { username, password };
+    const user = { username: username, password: password };
     // send the username and password to the server
-    axios.post("http://blogservice.herokuapp.com/api/login", user)
+    axios.post(`http://localhost:${process.env.REACT_APP_SERVER_PORT}/login`, {
+        username : username,
+        password : password,
+      })
     .then((response) => {
-        // set the state of the user
-        setUser(response.data)
-        // store the user in localStorage
-        localStorage.setItem('user', response.data)
-        console.log(response.data)
-        console.log(user)
-        window.location.reload();
+        if (response.data.length === 0){
+            console.log('Fallo login')
+            setError('Usuario o clave inválidos')
+        }
+        else {
+            // set the state of the user
+            setUser(response.data)
+            // store the user in localStorage
+            localStorage.setItem('user', response.data)
+            console.log(response.data)
+            console.log(user)
+            window.location.reload();
+        }
+        
     }, reason => {
         console.error(reason); // Error!
-        console.log('Fallo login')
-        setError('Usuario o clave inválidos')
+        console.log('Hubo un error en el servidor')
+        setError('Hubo un error en el servidor')
     });
   };
 
