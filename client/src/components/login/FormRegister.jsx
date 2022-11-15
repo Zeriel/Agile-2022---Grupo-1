@@ -29,16 +29,23 @@ const Register = () => {
         email : email,
       })
     .then((response) => {
-        // set the state of the user
-        setUser(response.data)
-        // store the user in localStorage
-        localStorage.setItem('user', response.data)
-        console.log(response.data)
-        console.log(user)
-        setSuccess('Registro con éxito. Redirigiendo...')
-        setTimeout(function(){
-          window.location.href = '/';
-       }, 1500);
+        if (response.data == 'repetido'){
+          console.log('Mail repetido')
+          setError('El correo ' + email + ' ya se encuentra en uso')
+        } else {
+          // set the state of the user
+          setUser(response.data)
+          // store the user in localStorage
+          localStorage.setItem('user', response.data)
+          console.log(response.data)
+          console.log(user)
+          setError(undefined)
+          setSuccess('Registro con éxito. Redirigiendo...')
+          setTimeout(function(){
+            window.location.href = '/';
+        }, 1500);
+        }
+        
 
         
     }, reason => {
@@ -92,6 +99,7 @@ const Register = () => {
                                     :null} 
 
                                     {success?
+                                        
                                         <div className="p-3 mb-2 bg-success text-white">{ success }</div>
                                     :null} 
 

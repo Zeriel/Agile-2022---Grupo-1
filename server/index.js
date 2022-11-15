@@ -75,11 +75,22 @@ app.post('/register', (req, res) => {
   const firstname = req.body.firstname;
   const lastname = req.body.lastname;
 
-  pool.query(`insert into usuarios (password, nombre, apellido, mail) values ('${password}', '${firstname}', '${lastname}', '${email}')`, (err, results) => {
+  pool.query(`select usuarios.mail from usuarios where usuarios.mail = '${email}'`, (err, results) => {
     if (err) {
       return res.send(err);
     } else {
-      return res.send(results);
+      if (results.length !== 0) {
+        return res.send('repetido');
+      }
+      else {
+        pool.query(`insert into usuarios (password, nombre, apellido, mail) values ('${password}', '${firstname}', '${lastname}', '${email}')`, (err, results) => {
+          if (err) {
+            return res.send(err);
+          } else {
+            return res.send(results);
+          }
+        });
+      }
     }
   });
 });
