@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 const Notification = (props) => {
-    
+
   return (
     <>
         <Notif style={{ visibility: props.isOpen ? 'visible': 'hidden'}}>
@@ -46,6 +46,9 @@ const Notif = styled.div`
         margin: 5px 2px;
         border-bottom: 1px solid #d9d9d9;
         position: relative;
+    }
+    .data:hover{
+        background-color: #c6f7c488;
     }
     .contactar{
         position: absolute;
