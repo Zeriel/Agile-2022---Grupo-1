@@ -185,7 +185,7 @@ const Idea = styled.div`
         img{
             width: 300px;
             /* mantiene la imagen centrada para que no se deforme */
-            margin: auto;
+            /* margin: auto; */ /* Lo saco porque si el texto es chico queda mal */
             text-align: center;
         }
         p{
