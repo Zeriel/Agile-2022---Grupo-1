@@ -2,6 +2,8 @@ import React, {useState} from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 import HamburgerButton from './HamburgerButton';
+import Notif from "../notifications/Notification"
+import bell from '../../images/bell.png'
 
 function Navbar() {
 
@@ -21,8 +23,15 @@ function Navbar() {
     localStorage.clear();
   };
 
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleNotification = () => {
+      setIsOpen(!isOpen);
+  }
+
   return (
     <>
+      <Notif isOpen={isOpen} />
       <NavContainer>
         <h2>Incub<span>App</span></h2>
         <div className={`link ${clicked ? 'active' : ''}`}>
@@ -31,6 +40,9 @@ function Navbar() {
           <a className='hover-link' onClick={handleClick} href="/">Mis inversiones</a>
           <a className='hover-link' onClick={handleClick} href="/loadidea">Cargar idea</a>
           <a className='hover-link' onClick={handleLogout}  href="/">Salir</a>
+          <a className='hover-link notif' onClick={handleNotification}>
+            <img className="icon" src={bell} alt="bell"/>
+          </a>
         </div>
         <div className='hamburger'>
           <HamburgerButton clicked={clicked} handleClick={handleClick}/>
@@ -50,7 +62,10 @@ const NavContainer = styled.nav`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    
+    .icon{
+      width: 28px;
+      filter: white;
+    }
     h2{
         font-size: 1.8em;
         color: white;
@@ -136,6 +151,10 @@ const NavContainer = styled.nav`
       @media (min-width: 768px){
     	  display: none;
       }
+    }
+
+    .notif{
+      cursor: pointer;
     }
 `
 
