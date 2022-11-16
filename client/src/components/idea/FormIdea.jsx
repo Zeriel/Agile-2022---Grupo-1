@@ -94,6 +94,10 @@ function FormIdea({ user }) {
                                         <div className="p-3 mb-2 bg-danger text-white">{ error }</div>
                                     :null} 
 
+                                    {success?
+                                        <div className="p-3 mb-2 bg-success text-white">{ success }</div>
+                                    :null} 
+
                                 </div>
                                 </form>
                             </div>
