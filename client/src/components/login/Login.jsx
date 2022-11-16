@@ -32,9 +32,9 @@ const Login = () => {
             // set the state of the user
             setUser(response.data)
             // store the user in localStorage
-            localStorage.setItem('user', response.data)
+            localStorage.setItem('user', JSON.stringify(response.data))
             console.log(response.data)
-            console.log(user)
+            console.log(localStorage.getItem("user"))
             window.location.reload();
         }
         

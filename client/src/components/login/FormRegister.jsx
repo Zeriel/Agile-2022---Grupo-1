@@ -38,12 +38,6 @@ const Register = () => {
             console.log('Mail repetido')
             setError('El correo ' + email + ' ya se encuentra en uso')
           } else {
-            // set the state of the user
-            setUser(response.data)
-            // store the user in localStorage
-            localStorage.setItem('user', response.data)
-            console.log(response.data)
-            console.log(user)
             setError(undefined)
             setSuccess('Registro con éxito. Redirigiendo...')
             setTimeout(function(){
