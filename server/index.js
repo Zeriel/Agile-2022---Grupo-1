@@ -60,7 +60,7 @@ app.post('/login', (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
 
-  pool.query(`select usuarios.nombre, usuarios.mail, usuarios.apellido from usuarios where usuarios.mail = '${email}' && usuarios.password = '${password}'`, (err, results) => {
+  pool.query(`select usuarios.id, usuarios.nombre, usuarios.mail, usuarios.apellido from usuarios where usuarios.mail = '${email}' && usuarios.password = '${password}'`, (err, results) => {
     if (err) {
       return res.send(err);
     } else {
@@ -91,6 +91,23 @@ app.post('/register', (req, res) => {
           }
         });
       }
+    }
+  });
+});
+
+app.post('/upload_idea', (req, res) => {
+  const nombre = req.body.nombre;
+  const descripcion = req.body.descripcion;
+  const presupuesto = req.body.presupuesto;
+  const cronologia = req.body.cronologia;
+  const mail = req.body.mail;
+  const id_user = req.body.id_user;
+
+  pool.query(`insert into ideas (nombre, descripcion, presupuesto, cronologia, mail, emprendedor_id) values ('${nombre}', '${descripcion}', ${presupuesto}, '${cronologia}', '${mail}', ${id_user})`, (err, results) => {
+    if (err) {
+      return res.send(err);
+    } else {
+      return res.send(results);
     }
   });
 });

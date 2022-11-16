@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 import styled from 'styled-components'
-import smart from '../images/smart.png'
-import emptyLike from '../images/empty-like.png'
-import filledLike from '../images/filled-like.png'
+import smart from '../../images/smart.png'
+import emptyLike from '../../images/empty-like.png'
+import filledLike from '../../images/filled-like.png'
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom'
-import Login from './login/Login'
+import Login from '../login/Login'
 
 function IdeaFull({ user }, props) {
 

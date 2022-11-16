@@ -36,7 +36,7 @@ function Navbar() {
         <h2>Incub<span>App</span></h2>
         <div className={`link ${clicked ? 'active' : ''}`}>
           <a className='hover-link' onClick={handleClick} href="/">Home</a>
-          <a className='hover-link' onClick={handleClick} href="/">Mis ideas</a>
+          <a className='hover-link' onClick={handleClick} href="/mis-ideas">Mis ideas</a>
           <a className='hover-link' onClick={handleClick} href="/">Mis inversiones</a>
           <a className='hover-link' onClick={handleClick} href="/loadidea">Cargar idea</a>
           <a className='hover-link' onClick={handleLogout}  href="/">Salir</a>
