@@ -9,15 +9,28 @@ function Navbar() {
   const handleClick = () => {
     setClicked(!clicked)
   }
+
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [user, setUser] = useState()
+
+  const handleLogout = () => {
+    setUser({});
+    setUsername("");
+    setPassword("");
+    localStorage.clear();
+  };
+
   return (
     <>
       <NavContainer>
         <h2>Incub<span>App</span></h2>
         <div className={`link ${clicked ? 'active' : ''}`}>
           <a className='hover-link' onClick={handleClick} href="/">Home</a>
-          <a className='hover-link' onClick={handleClick} href="/">Mis ideas</a>
+          <a className='hover-link' onClick={handleClick} href="/mis-ideas">Mis ideas</a>
           <a className='hover-link' onClick={handleClick} href="/">Mis inversiones</a>
           <a className='hover-link' onClick={handleClick} href="/loadidea">Cargar idea</a>
+          <a className='hover-link' onClick={handleLogout}  href="/">Salir</a>
         </div>
         <div className='hamburger'>
           <HamburgerButton clicked={clicked} handleClick={handleClick}/>
@@ -31,7 +44,8 @@ function Navbar() {
 export default Navbar
 
 const NavContainer = styled.nav`
-    padding: .4rem;
+    position: relative;
+    padding: 20px;
     background-color: #48a345;
     display: flex;
     align-items: center;

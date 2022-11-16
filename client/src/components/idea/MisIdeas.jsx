@@ -2,8 +2,6 @@ import React, {useState} from 'react';
 import {handleSubmit} from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
-import SearchBar from './SearchBar';
-import IdeaSummary from './IdeaSummary';
 import smart from '../../images/smart.png'
 import emptyLike from '../../images/empty-like.png'
 import filledLike from '../../images/filled-like.png'
@@ -25,6 +23,9 @@ function Homepage({ user }, props) {
     }
 
     const [ideas, setIdea] = React.useState(null);
+
+    const loggedInUser = JSON.parse(localStorage.getItem("user"))[0];
+    console.log(loggedInUser.id)
 
     React.useEffect(() => {
         axios.get(`http://localhost:${process.env.REACT_APP_SERVER_PORT}/getIdeas`, {
@@ -85,21 +86,10 @@ function Homepage({ user }, props) {
 
 
         {ideas.filter(post => {
-                if ((queryNombre === '') && (queryEmprendedor === '') && (queryPresupuesto === '')) {
+                // Filtro todas las ideas por la del ID de la url
+            if ( post.emprendedor_id == loggedInUser.id ) {
                 return post;
-                } 
-                
-                if ( (queryNombre != '' ) && (post.nombre.toLowerCase().includes(queryNombre.toLowerCase())) ) {
-                return post;
-                }
-
-                if ( ( queryEmprendedor != '') && ( (post.nombre_emp.toLowerCase().includes(queryEmprendedor.toLowerCase())) || (post.apellido_emp.toLowerCase().includes(queryEmprendedor.toLowerCase()))) ) {
-                return post;
-                }
-                
-                if ( (queryPresupuesto != '') && (post.presupuesto <= queryPresupuesto ) ) {
-                return post;
-                }
+              }
 
             }).map((idea, index) => (
             <div key={index}>

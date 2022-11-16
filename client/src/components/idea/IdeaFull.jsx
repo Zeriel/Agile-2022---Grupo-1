@@ -1,13 +1,14 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 import styled from 'styled-components'
-import smart from '../images/smart.png'
-import emptyLike from '../images/empty-like.png'
-import filledLike from '../images/filled-like.png'
+import smart from '../../images/smart.png'
+import emptyLike from '../../images/empty-like.png'
+import filledLike from '../../images/filled-like.png'
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom'
+import Login from '../login/Login'
 
-function IdeaFull(props) {
+function IdeaFull({ user }, props) {
 
   
 
@@ -40,6 +41,11 @@ function IdeaFull(props) {
         });
     }, []);
 
+    // Si el usuario no esta autenticado, redirijo a Login
+    if(!user) {
+        return <Login/>
+    }
+
   if (!ideas) return null;
 
 
@@ -63,6 +69,7 @@ function IdeaFull(props) {
                             <p className="creator">por <strong>{idea.nombre_emp} {idea.apellido_emp}</strong></p>
                             <p className="info">Categoría: <strong>Electrónica</strong></p>
                             <p className="info">Presupuesto inicial: <strong>${idea.presupuesto}</strong></p>
+                            <p className="info">Prueba/demo: <strong>Link a la demo</strong></p>
                             <Link className="contrib-btn">Quiero Contribuir</Link>
                         </div>
                         <img className="like" src={liked ? filledLike : emptyLike} onClick={handleLike} alt="like button"/>
